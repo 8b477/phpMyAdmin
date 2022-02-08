@@ -19,15 +19,15 @@ class Dbpdo
     public function connexion(): ?PDO
     {
         try {
-            $db = new PDO("mysql:host=$this->_server;dbname=$this->_db", $this->_user, $this->_password);
+            $db = new PDO("mysql:host=$this->_server;dbname=$this->_db;charset=utf8", $this->_user, $this->_password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "<p>!!!</p>";
+            echo "<p>Connecté depuis ma classe de l'objet créé !</p>";
+            return $db;
         }
         catch (Exception $e) {
             echo "<p>Erreur : " . $e->getMessage() . "</p>";
-            return null;
         }
-        return $db;
+        return null;
     }
 
     public function getOff() :bool{
