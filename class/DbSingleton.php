@@ -3,7 +3,7 @@ class DbSingleton
 {
     //méthode statique qui me permet de l'invoquer sans avoir créé d’instance avant.
     private static ?PDO $pdoObject = null;
-    //Le Data Source Name (DSN)
+    //Le Data Source Name (DSN) + le %s pour signifier une chaîne de caractères.
     private static string $dsn = "mysql:host=%s;dbname=%s;charset=%s";
 
 
@@ -12,7 +12,7 @@ class DbSingleton
         if  (self::$pdoObject === null){
             try{
                 //J'utilise ma classe config pour passer les paramètres requis pour la connexion.
-                //J'utilise la fonction sprintf pour retourner une chaîne formatée.
+                //J'utilise la fonction sprintf pour retourner une chaîne de caractères créée suivant le format (ici %s donc un string).
                 $dsn = sprintf(self::$dsn, Config::DB_HOST, Config::DB_NAME, Config::DB_CHARSET);
                 self::$pdoObject = new PDO($dsn, Config::DB_USER, Config::DB_PASS);
                 self::$pdoObject->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
